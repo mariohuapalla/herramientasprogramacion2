@@ -18,7 +18,6 @@ namespace api_autores.Entitys
         public string nombre { get; set; }
         [Required]
         public bool estado { get; set; }
-
         public List<Libro> libro { get; set; }
     }
 }

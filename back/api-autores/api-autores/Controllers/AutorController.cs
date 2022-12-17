@@ -16,6 +16,7 @@ namespace api_autores.Controllers
     {
         private readonly ApplicationDBContext context;
 
+
         //creamos el metodo constructor
         public AutorController(ApplicationDBContext context)
         {
@@ -51,7 +52,15 @@ namespace api_autores.Controllers
         {
             var autor = await context.Autor
                 .FirstOrDefaultAsync(x => x.codigoautor == id);
-            return autor;
+            if (autor == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return autor;
+            }
+            
 
         }
 

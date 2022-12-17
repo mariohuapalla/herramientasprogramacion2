@@ -28,6 +28,7 @@ namespace api_autores
         public void ConfigureServices(IServiceCollection services)
         {
 
+            //agregamos una opcion para la serializacion de JSON
             services.AddControllers();
 
             //agregamos la conexion a la base de datos
@@ -36,6 +37,18 @@ namespace api_autores
                     Configuration.GetConnectionString("defaultConnection")
                     )
                 );
+
+            services.AddCors(
+                options =>{
+                    var frontendurl = Configuration
+                    .GetValue<string>("frontend_url");
+                    options.AddDefaultPolicy(builder =>
+                    {
+                        builder.WithOrigins(frontendurl)
+                        .AllowAnyMethod().AllowAnyHeader();
+                        
+                    });
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -56,6 +69,8 @@ namespace api_autores
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

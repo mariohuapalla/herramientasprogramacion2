@@ -14,6 +14,7 @@ namespace api_autores.Entitys
         [Required]
         public bool estado { get; set; }
         [Required]
+        public int codigoautor { get; set; }
         public Autor autor { get; set; }
     }
 }
